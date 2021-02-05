@@ -1,3 +1,4 @@
+import 'package:Luna/pages/gonullu/profile.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavBarV2 extends StatefulWidget {
@@ -69,6 +70,12 @@ class _BottomNavBarV2State extends State<BottomNavBarV2> {
                                   : Colors.grey.shade400,
                             ),
                             onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => GonulluProfil(),
+                                ),
+                              );
                               setBottomBarIndex(2);
                             }),
                       ],
