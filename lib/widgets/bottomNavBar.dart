@@ -51,7 +51,7 @@ class _BottomNavBarV2State extends State<BottomNavBarV2> {
                       children: [
                         IconButton(
                             icon: Icon(
-                              Icons.disc_full_outlined,
+                              Icons.disc_full,
                               color: currentIndex == 1
                                   ? Colors.orange
                                   : Colors.grey.shade400,

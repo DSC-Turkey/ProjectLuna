@@ -28,9 +28,9 @@ class _Base extends State<Base> {
         backgroundColor: Colors.black,
         bottomNavigationBar: BottomNavigationBar(
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.ac_unit), label: ""),
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
-            BottomNavigationBarItem(icon: Icon(Icons.ac_unit), label: ""),
+            BottomNavigationBarItem(icon: Icon(Icons.ac_unit), title: Text("")),
+            BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("")),
+            BottomNavigationBarItem(icon: Icon(Icons.ac_unit), title: Text("")),
           ],
           currentIndex: _currentIndex,
           onTap: _onItemTapped,
