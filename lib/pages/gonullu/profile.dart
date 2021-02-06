@@ -1,5 +1,6 @@
 import 'package:Luna/GetX/FirabaseController.dart';
 import 'package:Luna/pages/gonullu/createProject.dart';
+import 'package:day_night_switch/day_night_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,46 +16,68 @@ class _GonulluProfil extends State<GonulluProfil> {
   Widget build(BuildContext context) {
     Size s = MediaQuery.of(context).size;
     return Scaffold(
+      // floatingActionButton: RaisedButton(
+      //   onPressed: () {
+      //     controller.signout();
+      //   },
+      //   color: Colors.red,
+      //   child: Text("Çıkış yap"),
+      // ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           languegeSelector(),
           centerOfPage(s),
-          SizedBox(
-            height: s.height * 0.1,
-          ),
-          RaisedButton(
-            onPressed: () {
-              controller.signout();
-            },
-            color: Colors.red,
-            child: Text("Çıkış yap"),
-          ),
         ],
       ),
     );
   }
 
+  // languegeSelector() {
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.end,
+  //     children: [
+  //       toggleValue ? Text("EN") : Text("TR"),
+  //       Text(
+  //         "  |",
+  //         style: textStyle(20, Colors.grey),
+  //       ),
+  //       Switch(
+  //         value: toggleValue,
+  //         onChanged: (value) {
+  //           setState(() {
+  //             toggleValue = !toggleValue;
+  //           });
+  //         },
+  //         activeTrackColor: Color(0xFF596ee1),
+  //         activeColor: Colors.white,
+  //       ),
+  //     ],
+  //   );
+  // }
+
   languegeSelector() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        toggleValue ? Text("EN") : Text("TR"),
-        Text(
-          "  |",
-          style: textStyle(20, Colors.grey),
-        ),
-        Switch(
+    return Padding(
+      padding: const EdgeInsets.only(right: 32.0),
+      child: Transform.scale(
+        scale: 2.5,
+        child: Switch(
           value: toggleValue,
-          onChanged: (value) {
+          onChanged: (bool value) {
             setState(() {
-              toggleValue = !toggleValue;
+              toggleValue = value;
             });
           },
-          activeTrackColor: Color(0xFF596ee1),
-          activeColor: Colors.white,
+          inactiveThumbColor: Color(0xfff49d42),
+          inactiveTrackColor: Colors.grey[200],
+          activeColor: Color(0xfff49d42),
+          activeTrackColor: Colors.grey[200],
+          activeThumbImage: AssetImage('assets/icons/GUNESS.png'),
+          inactiveThumbImage: AssetImage('assets/icons/606795.png'),
         ),
-      ],
+      ),
     );
   }
 
@@ -66,13 +89,20 @@ class _GonulluProfil extends State<GonulluProfil> {
         children: [
           Center(
             child: Container(
-              height: s.height * 0.75,
+              height: s.height * 0.7,
               width: s.width * 0.9,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Color(0xFFF49C42),
-                border: Border.all(
-                  color: Colors.grey[600],
+                borderRadius: BorderRadius.circular(50),
+                gradient: LinearGradient(
+                  begin: Alignment(-1.0, 0.0),
+                  end: Alignment(1.0, 0.0),
+                  colors: [
+                    const Color(0xfffabd5e),
+                    const Color(0xfff7b053),
+                    const Color(0xfff49d42),
+                    const Color(0xfff3963d),
+                  ],
+                  stops: [0.0, 0.232, 0.687, 1.0],
                 ),
               ),
               child: Column(
@@ -81,7 +111,7 @@ class _GonulluProfil extends State<GonulluProfil> {
                   userDatas(s),
                   editMyProfileButton(),
                   Container(
-                    height: s.height * 0.6,
+                    height: s.height * 0.55,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -128,11 +158,11 @@ class _GonulluProfil extends State<GonulluProfil> {
 
   badget(Size s) {
     return Positioned(
-      left: s.height * 0.055,
-      top: s.height * 0.12,
+      left: s.height * 0.07,
+      top: s.height * 0.17,
       child: Container(
-        height: s.height * 0.05,
-        width: s.height * 0.05,
+        height: s.height * 0.07,
+        width: s.height * 0.07,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: Color(0xFFF2F4F6),
@@ -141,25 +171,24 @@ class _GonulluProfil extends State<GonulluProfil> {
             color: Color(0xFFF49C42),
           ),
         ),
-        child: Image.network(
-            "https://cdn.pixabay.com/photo/2020/07/07/06/04/award-5379357_960_720.png"),
+        child: Image.asset("assets/images/Rozet.png"),
       ),
     );
   }
 
   photoOfUser(Size s) {
     return Positioned(
-      left: 5,
+      left: 0,
+      bottom: s.height * 0.6,
       child: Container(
-        height: s.height * 0.15,
-        width: s.height * 0.15,
+        height: s.height * 0.2,
+        width: s.height * 0.2,
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(color: Color(0xFFF49C42), width: 2),
           shape: BoxShape.circle,
         ),
-        child: Image.network(
-            "https://icons-for-free.com/iconfiles/png/512/girl+lady+woman+icon-1320166689851732796.png"),
+        child: Image.asset("assets/images/Sarışın Kadın.png"),
       ),
     );
   }
@@ -180,11 +209,11 @@ class _GonulluProfil extends State<GonulluProfil> {
               width: s.width * 0.8,
               decoration: BoxDecoration(
                 color: Color(0xFFF2F4F6),
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(20),
               ),
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 30.0, horizontal: 16),
+                    const EdgeInsets.symmetric(vertical: 15.0, horizontal: 16),
                 child: Center(
                   child: Text(
                     "Proje Oluştur",
@@ -202,11 +231,11 @@ class _GonulluProfil extends State<GonulluProfil> {
               width: s.width * 0.8,
               decoration: BoxDecoration(
                 color: Color(0xFFF2F4F6),
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(20),
               ),
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 30.0, horizontal: 16),
+                    const EdgeInsets.symmetric(vertical: 15.0, horizontal: 16),
                 child: Center(
                   child: Text(
                     "Projeler",
@@ -226,7 +255,7 @@ class _GonulluProfil extends State<GonulluProfil> {
 
   userStatics(Size s) {
     return Container(
-      height: s.height * 0.35,
+      height: s.height * 0.3,
       child: Padding(
         padding: const EdgeInsets.only(left: 16.0),
         child: Column(
@@ -275,32 +304,35 @@ class _GonulluProfil extends State<GonulluProfil> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        width: s.width * 0.9,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: s.height * 0.1,
-              width: s.width * 0.4,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      "Tahir Uzelli",
-                      style: textStyle(28, Colors.white),
-                    ),
-                    Text(
-                      "Gönüllü",
-                      style: textStyle(25, Colors.white),
-                    ),
-                  ],
+        width: s.width,
+        child: Padding(
+          padding: EdgeInsets.only(left: s.width * 0.2),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: s.height * 0.1,
+                width: s.width * 0.4,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        "Tahir Uzelli",
+                        style: textStyle(28, Colors.white),
+                      ),
+                      Text(
+                        "Gönüllü",
+                        style: textStyle(25, Colors.white),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

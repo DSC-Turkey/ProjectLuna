@@ -33,7 +33,7 @@ class MyTextFormField extends StatelessWidget {
           hintText: hintText,
           contentPadding: EdgeInsets.all(23.0),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide(
               width: 0,
               style: BorderStyle.none,
