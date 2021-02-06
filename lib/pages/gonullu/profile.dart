@@ -1,3 +1,4 @@
+import 'package:Luna/pages/gonullu/createProject.dart';
 import 'package:flutter/material.dart';
 
 class GonulluProfil extends StatefulWidget {
@@ -158,7 +159,9 @@ class _GonulluProfil extends State<GonulluProfil> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateProject()));
+            },
             child: Container(
               width: s.width * 0.8,
               decoration: BoxDecoration(
