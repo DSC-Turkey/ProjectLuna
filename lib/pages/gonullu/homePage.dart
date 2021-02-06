@@ -1,3 +1,7 @@
+import 'dart:math';
+
+import 'package:Luna/Enterence/Login.dart';
+import 'package:Luna/pages/projectDetail.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -12,16 +16,26 @@ class _GonulluHomePage extends State<GonulluHomePage> {
     "https://www.mesa.com.tr/img/gelecekprojelerImg.png",
     "https://chainpm.com/uploads/uygulama-projesi-ve-kesin-proje-arasindaki-farklar-5d381b65bb0e8.png",
   ];
+  List<Color> colors = [
+    Color(0xFFDF5E63),
+    Color(0xFF8077B6),
+    Color(0xFF5B86A9),
+  ];
+  List<Color> subColors = [
+    Color(0xFFE46467),
+    Color(0xFF8883BD),
+    Color(0xFF5A86AB),
+  ];
   @override
   Widget build(BuildContext context) {
     Size s = MediaQuery.of(context).size;
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           carouselSlider(s),
           activeProjects(s),
-          createProject(s),
+          //createProject(s),
         ],
       ),
     );
@@ -45,25 +59,124 @@ class _GonulluHomePage extends State<GonulluHomePage> {
   }
 
   activeProjects(Size s) {
-    return Container(
-      height: s.height * 0.5,
-      width: s.width,
-      child: GridView.count(
-        crossAxisCount: 2,
-        children: List.generate(10, (index) {
-          return item(s);
-        }),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => LoginPage()));
+      },
+      child: Container(
+        height: s.height * 0.6,
+        width: s.width,
+        child: ListView.builder(
+          itemCount: 50,
+          itemBuilder: (context, index) {
+            Random rand = Random();
+            int random = rand.nextInt(3);
+            return item(s, colors[random], subColors[random]);
+          },
+        ),
       ),
     );
   }
 
-  item(Size s) {
+  item(Size s, Color color, Color subColor) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Card(
-        color: Colors.black,
+      child: Container(
+        width: s.width * 0.9,
+        height: s.height * .15,
+        child: Stack(
+          children: [
+            middleOfCard(s, color),
+            userPhoto(s, subColor),
+          ],
+        ),
       ),
     );
+  }
+
+  middleOfCard(Size s, Color color) {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Container(
+        width: s.width * 0.8,
+        height: s.height * 0.13,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10), color: color),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(),
+              cardDatas(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  userPhoto(Size s, Color subColor) {
+    return Positioned(
+      left: 0,
+      top: s.height * 0.005,
+      child: Container(
+        height: s.height * 0.14,
+        width: s.height * 0.14,
+        decoration: BoxDecoration(
+          color: subColor,
+          shape: BoxShape.circle,
+        ),
+        child: Image.network(
+            "https://icons-for-free.com/iconfiles/png/512/girl+lady+woman+icon-1320166689851732796.png"),
+      ),
+    );
+  }
+
+  cardDatas() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Proje Adı",
+          style: textStyle(25),
+        ),
+        Text(
+          "Gönüllü Adı",
+          style: textStyle(22),
+        ),
+        Text(
+          "Proje Alanı | Proje Konusu",
+          style: textStyle(22),
+        ),
+        Row(
+          children: [
+            Icon(
+              Icons.access_time,
+              color: Colors.white,
+            ),
+            Text(
+              " 85 | ",
+              style: textStyle(20),
+            ),
+            Icon(
+              Icons.language,
+              color: Colors.white,
+            ),
+            Text(
+              " TR",
+              style: textStyle(20),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  textStyle(double size) {
+    return TextStyle(
+        color: Colors.white, fontSize: size,);
   }
 
   carouselPage(String imageUrl) {
