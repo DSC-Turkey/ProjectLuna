@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:Luna/Enterence/Login.dart';
+import 'package:Luna/pages/projectDetail.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -57,16 +59,22 @@ class _GonulluHomePage extends State<GonulluHomePage> {
   }
 
   activeProjects(Size s) {
-    return Container(
-      height: s.height * 0.6,
-      width: s.width,
-      child: ListView.builder(
-        itemCount: 50,
-        itemBuilder: (context, index) {
-          Random rand = Random();
-          int random =rand.nextInt(3);
-          return item(s, colors[random], subColors[random]);
-        },
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => LoginPage()));
+      },
+      child: Container(
+        height: s.height * 0.6,
+        width: s.width,
+        child: ListView.builder(
+          itemCount: 50,
+          itemBuilder: (context, index) {
+            Random rand = Random();
+            int random = rand.nextInt(3);
+            return item(s, colors[random], subColors[random]);
+          },
+        ),
       ),
     );
   }
@@ -149,15 +157,15 @@ class _GonulluHomePage extends State<GonulluHomePage> {
               color: Colors.white,
             ),
             Text(
-              "85 | ",
+              " 85 | ",
               style: textStyle(20),
             ),
             Icon(
-              Icons.airline_seat_individual_suite,
+              Icons.language,
               color: Colors.white,
             ),
             Text(
-              "TR",
+              " TR",
               style: textStyle(20),
             ),
           ],
@@ -167,7 +175,8 @@ class _GonulluHomePage extends State<GonulluHomePage> {
   }
 
   textStyle(double size) {
-    return TextStyle(color: Colors.white, fontSize: size);
+    return TextStyle(
+        color: Colors.white, fontSize: size,);
   }
 
   carouselPage(String imageUrl) {

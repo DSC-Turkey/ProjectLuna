@@ -2,6 +2,7 @@ import 'package:Luna/Enterence/ForgetPass.dart';
 import 'package:Luna/Enterence/RegisterPage.dart';
 import 'package:Luna/GetX/FirabaseController.dart';
 import 'package:Luna/Widgets/SocialLogin.dart';
+import 'package:Luna/widgets/myTextField.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,141 +10,175 @@ import 'package:get/get.dart';
 class LoginPage extends GetWidget<FirebaseController> {
   final _formKey = GlobalKey<FormState>();
   String email, pass;
+  bool passwordVisible = true;
   @override
   Widget build(BuildContext context) {
+    Size s = MediaQuery.of(context).size;
     return Scaffold(
-        body: SafeArea(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Giriş Yap"),
-                SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'E posta',
-                      // hintStyle: TextStyle(color: Colors.white),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        // borderSide: BorderSide(color: Colors.white),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        // borderSide: BorderSide(
-                        //   color: Colors.blue[400],
-                        // ),
-                      ),
-                      isDense: true, // Added this
-                      contentPadding: EdgeInsets.fromLTRB(10, 20, 10, 10),
-                    ),
-                    // cursorColor: Colors.white,
-                    // style: TextStyle(color: Colors.white),
-                    validator: (String val) {
-                      if (!GetUtils.isEmail(val)) {
-                        return "Lütfen geçerli bir e posta adresi girirniz... ";
-                      }
-                      return null;
-                    },
-                    onSaved: (String val) {
-                      email = val;
-                    },
+      body: SafeArea(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                children: [
+                  Image.asset(
+                    "assets/images/Logo Png.png",
+                    height: s.height * 0.2,
+                    width: s.width * 0.9,
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Şifre',
-                      // hintStyle: TextStyle(color: Colors.white),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        // borderSide: BorderSide(color: Colors.white),
+                  SizedBox(height: 20),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 40.0),
+                        child: Text(
+                          "E Posta",
+                          style: TextStyle(fontSize: 25),
+                        ),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        // borderSide: BorderSide(
-                        //   color: Colors.blue[400],
-                        // ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                        child: MyTextFormField(
+                          validator: (String val) {
+                            if (!GetUtils.isEmail(val)) {
+                              return "Lütfen geçerli bir e posta adresi girirniz... ";
+                            }
+                            return null;
+                          },
+                          onSaved: (String val) {
+                            email = val;
+                          },
+                        ),
                       ),
-                      isDense: true, // Added this
-                      contentPadding: EdgeInsets.fromLTRB(10, 20, 10, 10),
-                    ),
-                    // cursorColor: Colors.white,
-                    // style: TextStyle(color: Colors.white),
-                    validator: (String val) {
-                      if (val.length <= 0) {
-                        return "Şifre boş bırakılamaz";
-                      }
-                      return null;
-                    },
-                    onSaved: (String val) {
-                      pass = val;
-                    },
+                      SizedBox(height: 20),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 40.0),
+                        child: Text(
+                          "Şifre",
+                          style: TextStyle(fontSize: 25),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                        child: MyTextFormField(
+                          validator: (String val) {
+                            if (val.length <= 0) {
+                              return "Şifre boş bırakılamaz";
+                            }
+                            return null;
+                          },
+                          onSaved: (String val) {
+                            pass = val;
+                          },
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              passwordVisible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: Colors.grey,
+                            ),
+                            onPressed: () {},
+                          ),
+                          isPassword: passwordVisible,
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            if (_formKey.currentState.validate()) {
+                              _formKey.currentState.save();
+                              print("Login Clicked Event");
+                              _login();
+                            }
+                          },
+                          child: Container(
+                            height: s.height * 0.06,
+                            width: s.width * 0.9,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              gradient: LinearGradient(
+                                begin: Alignment(-1.0, 0.0),
+                                end: Alignment(1.0, 0.0),
+                                colors: [
+                                  const Color(0xff8a84be),
+                                  const Color(0xff7a6fb0),
+                                  const Color(0xff6958a1)
+                                ],
+                                stops: [0.0, 0.514, 1.0],
+                              ),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Giriş Yap",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 25),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                RaisedButton(
-                  onPressed: () {
-                    Get.to(ForgotPassword());
-                  },
-                  color: Colors.black,
-                  child: Text(
-                    "Şifremi Unuttum",
-                    style: TextStyle(color: Colors.white),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Giriş detaylarını mı unuttun?",
+                        style: TextStyle(fontSize: 22),
+                      ),
+                      Text(
+                        "   Yardım al",
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Color(0xFF6862f9),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                RaisedButton(
-                  onPressed: () {
-                    if (_formKey.currentState.validate()) {
-                      _formKey.currentState.save();
-                      print("Login Clicked Event");
-                      _login();
-                    }
-                  },
-                  child: Text("Giriş Yap"),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                SocialSignWidgetRow(),
-                Text("ile Giriş yap"),
-              ],
-            ),
+                ],
+              ),
+              // Container(
+              //   height: 1,
+              //   width: s.width,
+              //   color: Colors.grey[500],
+              // )
+            ],
           ),
         ),
-        bottomNavigationBar: GestureDetector(
-          onTap: () {
-            Get.offAll(RegisterPage());
-          },
-          child: RichText(
+      ),
+      bottomNavigationBar: GestureDetector(
+        onTap: () {
+          Get.offAll(RegisterPage());
+        },
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            RichText(
               text: TextSpan(
-            text: ' Hesabın yok mu?',
-            style: TextStyle(fontSize: 15.0, color: Colors.black),
-            children: <TextSpan>[
-              TextSpan(
-                text: ' Kayıt ol',
-                style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18,
-                    color: Color(0XFF4321F5)),
+                text: ' Hesabın yok mu?',
+                style: TextStyle(fontSize: 15.0, color: Colors.black),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: ' Kayıt ol',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                        color: Color(0XFF4321F5)),
+                  ),
+                ],
               ),
-            ],
-          )),
-        ));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   void _login() {

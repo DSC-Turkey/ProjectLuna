@@ -31,7 +31,7 @@ class MyTextFormField extends StatelessWidget {
         controller: controller,
         decoration: InputDecoration(
           hintText: hintText,
-          contentPadding: EdgeInsets.all(15.0),
+          contentPadding: EdgeInsets.all(23.0),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
             borderSide: BorderSide(
@@ -42,7 +42,7 @@ class MyTextFormField extends StatelessWidget {
           labelText: labelText,
           filled: true,
           suffixIcon: this.suffixIcon,
-          fillColor: Color(0xFFEEEEF3),
+          fillColor: Color(0xfff2f3f6),
         ),
         obscureText: isPassword ? true : false,
         validator: validator,
