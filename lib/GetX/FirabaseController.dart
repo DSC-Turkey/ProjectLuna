@@ -1,4 +1,5 @@
-import 'package:Luna/Base/Base.dart';
+import 'package:Luna/pages/base.dart';
+
 import 'package:Luna/Enterence/Login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

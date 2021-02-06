@@ -1,4 +1,4 @@
-import 'package:Luna/Base/Base.dart';
+import 'package:Luna/pages/base.dart';
 import 'package:Luna/Enterence/Login.dart';
 import 'package:Luna/GetX/FirabaseController.dart';
 import 'package:get/get.dart';

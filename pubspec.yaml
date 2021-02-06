@@ -21,6 +21,7 @@ dependencies:
   flutter_svg: ^0.19.1
   share: ^0.6.5+4
   cupertino_icons: ^1.0.0
+  carousel_slider: ^2.1.0
 
 dev_dependencies:
   flutter_test:

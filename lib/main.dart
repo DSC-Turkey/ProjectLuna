@@ -1,6 +1,7 @@
 import 'package:Luna/Enterence/InstanceBinding.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:Luna/pages/base.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,10 +22,7 @@ class MyApp extends StatelessWidget {
 
       debugShowCheckedModeBanner: false,
       home: IsSignedIn(),
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+
       // home: LogoAndName(),
     );
   }
@@ -68,17 +66,11 @@ class _LogoAndNameState extends State<LogoAndName> {
             //   fit: BoxFit.fill,
             // ),
             ),
-        child: Column(
-          children: [
-            SizedBox(height: size.height * 0.2),
-            // Image.asset(
-            //   "assets/images/geciciLogo.png",
-            //   width: size.width / 2,
-            // ),
-            Spacer(),
-            SizedBox(height: size.height * 0.2),
-          ],
-        ),
+        //    color: blue1,
+        // image: DecorationImage(
+        //   image: AssetImage('assets/images/karşılamaEkranıBG.png'),
+        //   fit: BoxFit.fill,
+        // ),
       ),
     );
   }
