@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -61,7 +63,9 @@ class _GonulluHomePage extends State<GonulluHomePage> {
       child: ListView.builder(
         itemCount: 50,
         itemBuilder: (context, index) {
-          return item(s, colors[index % 3], subColors[index % 3]);
+          Random rand = Random();
+          int random =rand.nextInt(3);
+          return item(s, colors[random], subColors[random]);
         },
       ),
     );

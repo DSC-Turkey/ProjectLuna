@@ -6,6 +6,7 @@ class GonulluProfil extends StatefulWidget {
 }
 
 class _GonulluProfil extends State<GonulluProfil> {
+  bool toggleValue = true;
   @override
   Widget build(BuildContext context) {
     Size s = MediaQuery.of(context).size;
@@ -13,10 +14,33 @@ class _GonulluProfil extends State<GonulluProfil> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          editButton(s),
+          languegeSelector(),
           centerOfPage(s),
         ],
       ),
+    );
+  }
+
+  languegeSelector() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        toggleValue ? Text("EN") : Text("TR"),
+        Text(
+          "  |",
+          style: textStyle(20, Colors.grey),
+        ),
+        Switch(
+          value: toggleValue,
+          onChanged: (value) {
+            setState(() {
+              toggleValue = !toggleValue;
+            });
+          },
+          activeTrackColor: Color(0xFF596ee1),
+          activeColor: Colors.white,
+        ),
+      ],
     );
   }
 
@@ -32,7 +56,7 @@ class _GonulluProfil extends State<GonulluProfil> {
               width: s.width * 0.9,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Color(0xFFE46467),
+                color: Color(0xFFF49C42),
                 border: Border.all(
                   color: Colors.grey[600],
                 ),
@@ -41,6 +65,7 @@ class _GonulluProfil extends State<GonulluProfil> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   userDatas(s),
+                  editMyProfileButton(),
                   Container(
                     height: s.height * 0.6,
                     child: Column(
@@ -63,6 +88,30 @@ class _GonulluProfil extends State<GonulluProfil> {
     );
   }
 
+  editMyProfileButton() {
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0),
+      child: Align(
+        alignment: Alignment.topRight,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(
+              color: Colors.grey[700],
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(3.0),
+            child: Text(
+              "Profili Düzenle",
+              style: textStyle(20, Colors.white),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   badget(Size s) {
     return Positioned(
       left: s.height * 0.055,
@@ -74,7 +123,8 @@ class _GonulluProfil extends State<GonulluProfil> {
           shape: BoxShape.circle,
           color: Color(0xFFF2F4F6),
           border: Border.all(
-            color: Color(0xFFE46467),
+            width: 2,
+            color: Color(0xFFF49C42),
           ),
         ),
         child: Image.network(
@@ -90,7 +140,8 @@ class _GonulluProfil extends State<GonulluProfil> {
         height: s.height * 0.15,
         width: s.height * 0.15,
         decoration: BoxDecoration(
-          color: Color(0xFFDF5E63),
+          color: Colors.white,
+          border: Border.all(color: Color(0xFFF49C42), width: 2),
           shape: BoxShape.circle,
         ),
         child: Image.network(
@@ -102,12 +153,14 @@ class _GonulluProfil extends State<GonulluProfil> {
   buttons(Size s) {
     return Container(
       width: s.width * 0.9,
-      child: Row(
+      height: s.height * 0.25,
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           GestureDetector(
             onTap: () {},
             child: Container(
+              width: s.width * 0.8,
               decoration: BoxDecoration(
                 color: Color(0xFFF2F4F6),
                 borderRadius: BorderRadius.circular(10),
@@ -115,12 +168,21 @@ class _GonulluProfil extends State<GonulluProfil> {
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 30.0, horizontal: 16),
-                child: Text("Aktif Projeleri Göster"),
+                child: Center(
+                  child: Text(
+                    "Proje Oluştur",
+                    style: textStyle(
+                      30,
+                      Colors.grey[800],
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
           GestureDetector(
             child: Container(
+              width: s.width * 0.8,
               decoration: BoxDecoration(
                 color: Color(0xFFF2F4F6),
                 borderRadius: BorderRadius.circular(10),
@@ -128,7 +190,15 @@ class _GonulluProfil extends State<GonulluProfil> {
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 30.0, horizontal: 16),
-                child: Text("Aktif Projeleri Göster"),
+                child: Center(
+                  child: Text(
+                    "Projeler",
+                    style: textStyle(
+                      30,
+                      Colors.grey[800],
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
@@ -139,7 +209,7 @@ class _GonulluProfil extends State<GonulluProfil> {
 
   userStatics(Size s) {
     return Container(
-      height: s.height * 0.4,
+      height: s.height * 0.35,
       child: Padding(
         padding: const EdgeInsets.only(left: 16.0),
         child: Column(
@@ -190,27 +260,24 @@ class _GonulluProfil extends State<GonulluProfil> {
       child: Container(
         width: s.width * 0.9,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               height: s.height * 0.1,
               width: s.width * 0.4,
-              decoration: BoxDecoration(
-                  color: Color(0xFFF2F4F6),
-                  border: Border.all(),
-                  borderRadius: BorderRadius.circular(20)),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
                       "Tahir Uzelli",
-                      style: textStyle(25, Colors.grey[500]),
+                      style: textStyle(28, Colors.white),
                     ),
                     Text(
                       "Gönüllü",
-                      style: textStyle(22, Colors.grey[500]),
+                      style: textStyle(25, Colors.white),
                     ),
                   ],
                 ),
@@ -218,21 +285,6 @@ class _GonulluProfil extends State<GonulluProfil> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  editButton(Size s) {
-    return Container(
-      width: s.width,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          IconButton(
-            icon: Icon(Icons.edit),
-            onPressed: () {},
-          ),
-        ],
       ),
     );
   }
