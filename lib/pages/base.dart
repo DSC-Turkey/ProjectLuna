@@ -1,3 +1,4 @@
+import 'package:Luna/pages/gonullu/kesfet.dart';
 import 'package:Luna/pages/gonullu/profile.dart';
 import 'package:Luna/widgets/bottomNavBar.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class Base extends StatefulWidget {
 class _Base extends State<Base> {
   int _currentIndex = 0;
   List<Widget> pages = [
-    GonulluProfil(),
+    GonulluKesfetPage(),
     GonulluHomePage(),
     GonulluProfil(),
   ];
