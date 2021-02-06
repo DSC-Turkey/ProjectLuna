@@ -2,6 +2,8 @@ import 'package:Luna/pages/gonullu/profile.dart';
 import 'package:Luna/widgets/bottomNavBar.dart';
 import 'package:flutter/material.dart';
 
+import 'gonullu/homePage.dart';
+
 class Base extends StatefulWidget {
   @override
   _Base createState() => _Base();
@@ -11,7 +13,7 @@ class _Base extends State<Base> {
   int _currentIndex = 0;
   List<Widget> pages = [
     GonulluProfil(),
-    GonulluProfil(),
+    GonulluHomePage(),
     GonulluProfil(),
   ];
   void _onItemTapped(int index) {
