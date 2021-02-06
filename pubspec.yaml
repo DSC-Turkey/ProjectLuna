@@ -22,6 +22,8 @@ dependencies:
   share: ^0.6.5+4
   cupertino_icons: ^1.0.0
   carousel_slider: ^2.1.0
+  permission_handler: ^5.1.0+2
+  agora_rtc_engine: ^3.2.1
 
 dev_dependencies:
   flutter_test:

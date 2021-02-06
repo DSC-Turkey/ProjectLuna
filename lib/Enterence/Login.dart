@@ -1,9 +1,9 @@
 import 'package:Luna/Enterence/ForgetPass.dart';
-import 'package:Luna/Enterence/RegisterPage.dart';
 import 'package:Luna/GetX/FirabaseController.dart';
 import 'package:Luna/Widgets/SocialLogin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:Luna/Enterence/SelectRole.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends GetWidget<FirebaseController> {
@@ -127,7 +127,7 @@ class LoginPage extends GetWidget<FirebaseController> {
         ),
         bottomNavigationBar: GestureDetector(
           onTap: () {
-            Get.offAll(RegisterPage());
+            Get.offAll(SelectRole());
           },
           child: RichText(
               text: TextSpan(

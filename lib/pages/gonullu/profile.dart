@@ -1,4 +1,6 @@
+import 'package:Luna/GetX/FirabaseController.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class GonulluProfil extends StatefulWidget {
   @override
@@ -6,6 +8,7 @@ class GonulluProfil extends StatefulWidget {
 }
 
 class _GonulluProfil extends State<GonulluProfil> {
+  final controller = Get.put(FirebaseController());
   @override
   Widget build(BuildContext context) {
     Size s = MediaQuery.of(context).size;
@@ -17,7 +20,14 @@ class _GonulluProfil extends State<GonulluProfil> {
           centerOfPage(s),
           SizedBox(
             height: s.height * 0.1,
-          )
+          ),
+          RaisedButton(
+            onPressed: () {
+              controller.signout();
+            },
+            color: Colors.red,
+            child: Text("Çıkış yap"),
+          ),
         ],
       ),
     );

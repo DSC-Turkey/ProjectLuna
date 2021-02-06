@@ -1,4 +1,4 @@
-import 'package:Luna/Enterence/RegisterPage.dart';
+import 'package:Luna/Enterence/SelectRole.dart';
 import 'package:Luna/GetX/FirabaseController.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -69,8 +69,8 @@ class ForgotPassword extends GetWidget<FirebaseController> {
       ),
       bottomNavigationBar: GestureDetector(
           onTap: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => RegisterPage()));
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => SelectRole()));
           },
           child: RichText(
             text: TextSpan(

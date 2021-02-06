@@ -28,21 +28,29 @@ class FirebaseController extends GetxController {
   // function to createuser, login and sign out user
 
   void createUser(
-      String firstname, String lastname, String email, String password) async {
-    CollectionReference reference =
-        FirebaseFirestore.instance.collection("Users");
-
-    Map<String, String> userdata = {
-      "First Name": firstname,
-      "Last Name": lastname,
-      "Email": email
-    };
+      String firstname, String lastname, String email, String password, String role) async {
     try {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
-        reference.add(userdata).then((value) => Get.offAll(Base()));
-      });
+     
+
+        FirebaseFirestore.instance
+            .collection("kullaniciler")
+            .doc(value.user.uid)
+            .set({
+          "userID": value.user.uid,
+          "firstname": firstname,
+          "lastname": lastname,
+          "email": email,
+          "userRole": role,
+      
+         
+        });
+      }).then((value) => Get.offAll(Base()));
+
+      // reference.add(userdata).then((value) => Get.offAll(Base()));
+
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password' ||
           ' The given password is invalid.' == e.code) {
@@ -110,21 +118,21 @@ class FirebaseController extends GetxController {
     }).catchError((onError) => Get.snackbar("Credential Error", "Failed"));
   }
 
-  void google_signIn() async {
+  void googleSignInMetot() async {
     final GoogleSignInAccount googleUser = await googleSignIn.signIn();
 
     final GoogleSignInAuthentication googleAuth =
         await googleUser.authentication;
 
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
+    final AuthCredential credential = GoogleAuthProvider.credential(
         idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
 
-    final User user = (await _auth
+    await _auth
         .signInWithCredential(credential)
-        .then((value) => Get.offAll(Base())));
+        .then((value) => Get.offAll(Base()));
   }
 
-  void google_signOut() async {
+  void googleSignOut() async {
     await googleSignIn.signOut().then((value) => Get.offAll(LoginPage()));
   }
 }

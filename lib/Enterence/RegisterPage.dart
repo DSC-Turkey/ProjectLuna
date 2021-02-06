@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RegisterPage extends GetWidget<FirebaseController> {
+  final String role;
+  RegisterPage(this.role);
   String firstn, lastn, email, pass;
   final _formKey = GlobalKey<FormState>();
   @override
@@ -188,6 +190,6 @@ class RegisterPage extends GetWidget<FirebaseController> {
   }
 
   void registerUser() {
-    controller.createUser(firstn, lastn, email, pass);
+    controller.createUser(firstn, lastn, email, pass, role);
   }
 }

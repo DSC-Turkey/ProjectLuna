@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "881433093719-70k0hss7s25j84h9e4t904jsaftdmkem.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Luna",
+            "certificate_hash": "bf152d9d68fe7e8f467b4850b7dd3795fb8e5520"
+          }
+        },
+        {
           "client_id": "881433093719-o2enddhs19cqt2p5qut6pa6507ncutp3.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -11,7 +11,7 @@ class SocialSignWidgetRow extends GetWidget<FirebaseController> {
         RaisedButton(
           onPressed: () {
             print("Google Clicked");
-            controller.google_signIn();
+            controller.googleSignInMetot();
           },
           color: Colors.green,
           child: Text("google"),
