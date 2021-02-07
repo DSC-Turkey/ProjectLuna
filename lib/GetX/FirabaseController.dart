@@ -10,7 +10,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseController extends GetxController {
   FirebaseAuth _auth = FirebaseAuth.instance;
-  SharedPreferences prefs;
+  bool passMode = true;
+
+  void passModeChange() {
+    print("sddss");
+    passMode = !passMode;
+    update();
+  }
+
   GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
   Rx<User> _firebaseUser = Rx<User>();
 
@@ -29,9 +36,8 @@ class FirebaseController extends GetxController {
 
   // function to createuser, login and sign out user
 
-  void createUser(String firstname, String lastname, String email,
-      String password, String role) async {
-    prefs = await SharedPreferences.getInstance();
+  void createUser(String firstname, lastname, email, phoneNumber, city,
+      password, role) async {
     try {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
@@ -44,9 +50,11 @@ class FirebaseController extends GetxController {
           "firstname": firstname,
           "lastname": lastname,
           "email": email,
+          "phoneNumber": phoneNumber,
+          "city": city,
           "userRole": role,
         });
-        prefs.setString("UserID", value.user.uid);
+       
       }).then((value) {
         Get.offAll(Base());
       });
