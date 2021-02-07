@@ -1,20 +1,13 @@
-import 'package:Luna/pages//projectDetail.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:Luna/pages/projectDetail.dart';
+import 'package:Luna/pages/searchPage.dart';
+import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
-class AraciHomePage extends StatefulWidget {
-  @override
-  _AraciHomePage createState() => _AraciHomePage();
+
+class KatilimciKesfetPage extends StatefulWidget {
+  _KatilimciKesfetPage createState() => _KatilimciKesfetPage();
 }
 
-class _AraciHomePage extends State<AraciHomePage> {
- AnimationController _controller;
-  Animation<double> _animation;
-  List images = [
-    "https://www.idecad.com.tr/images/icerik/9.jpg",
-    "https://www.mesa.com.tr/img/gelecekprojelerImg.png",
-    "https://chainpm.com/uploads/uygulama-projesi-ve-kesin-proje-arasindaki-farklar-5d381b65bb0e8.png",
-  ];
+class _KatilimciKesfetPage extends State<KatilimciKesfetPage> {
   List<BoxDecoration> colors = [
     BoxDecoration(
       borderRadius: BorderRadius.circular(5.54),
@@ -229,51 +222,56 @@ class _AraciHomePage extends State<AraciHomePage> {
         shape: BoxShape.circle),
   ];
 
+  final textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size s = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          carouselSlider(s),
-          activeProjects(s),
-          //createProject(s),
-        ],
-      ),
-    );
-  }
-
-  createProject(Size s) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Align(
-        alignment: Alignment.centerRight,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.pink[100],
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Text("Proje Oluştur"),
-          ),
+    return Container(
+      color: Colors.white,
+      child: SafeArea(
+            child: Scaffold(
+          body: randomActiveProject(s),
         ),
       ),
     );
   }
 
-  activeProjects(Size s) {
-    return Container(
-      height: s.height * 0.6,
-      width: s.width,
-      child: ListView.builder(
-        itemCount: 50,
-        itemBuilder: (context, index) {
-          return item(s, colors[index % 4], subColors[index % 4],
-              parametrCard[index % 4], parametrAppBar[index % 4]);
-        },
-      ),
+  randomActiveProject(Size s) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 8),
+          child: AnimSearchBar(
+            helpText: "Luna'da Ara",
+            rtl: true,
+            width: s.width,
+            textController: textController,
+            onSuffixTap: () {
+              setState(() {
+                textController.clear();
+              });
+            },
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top:20.0),
+          child: Container(
+            height: s.height * 0.8,
+            width: s.width,
+            child: ListView.builder(
+                itemCount: 30,
+                itemBuilder: (context, index) {
+                  return item(
+                    s,
+                    colors[index % 4],
+                    subColors[index % 4],
+                    parametrCard[index % 4],
+                    parametrAppBar[index % 4],
+                  );
+                }),
+          ),
+        ),
+      ],
     );
   }
 
@@ -306,25 +304,12 @@ class _AraciHomePage extends State<AraciHomePage> {
     return Positioned(
       right: 0,
       top: -5,
-      child: Stack(
-        children: [
-          Container(
-            height: s.height * 0.1,
-            width: s.height * 0.1,
-            child: Image.asset(
-              "assets/images/Sarı Takvim.png",
-            ),
-          ),
-          Positioned(
-            top: s.height * 0.041,
-            left: 20,
-            child: Transform(
-              alignment: FractionalOffset.center,
-              transform: Matrix4.rotationZ(0.65),
-              child: Text("1 Mart"),
-            ),
-          )
-        ],
+      child: Container(
+        height: s.height * 0.1,
+        width: s.height * 0.1,
+        child: Image.asset(
+          "assets/images/Sarı Takvim.png",
+        ),
       ),
     );
   }
@@ -410,73 +395,5 @@ class _AraciHomePage extends State<AraciHomePage> {
       color: Colors.white,
       fontSize: size,
     );
-  }
-
-  carouselPage(String imageUrl) {
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      //margin: EdgeInsets.all(5.0),
-      padding: EdgeInsets.only(bottom: 20),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15.0),
-        image: DecorationImage(
-          image: NetworkImage(imageUrl),
-          fit: BoxFit.cover,
-        ),
-      ),
-    );
-  }
-
-  carouselSlider(var size) {
-    return Container(
-      height: size.height / 4,
-      child: ListView(
-        children: <Widget>[
-          SizedBox(height: 15.0),
-          CarouselSlider(
-            options: CarouselOptions(
-              height: 180.0,
-              enlargeCenterPage: true,
-              autoPlay: true,
-              aspectRatio: 16 / 9,
-              autoPlayCurve: Curves.fastOutSlowIn,
-              enableInfiniteScroll: true,
-              autoPlayAnimationDuration: Duration(milliseconds: 800),
-              viewportFraction: 0.8,
-            ),
-            items: [
-              for (int i = 0; i < images.length; i++)
-                carouselPage(
-                  images[i],
-                ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class MyPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    canvas.save();
-    // rotate the canvas
-    final degrees = 15;
-    final radians = degrees * math.pi / 180;
-    canvas.rotate(radians);
-    // draw the text
-    final textStyle = TextStyle(color: Colors.black, fontSize: 30);
-    final textSpan = TextSpan(text: 'Hello, world.', style: textStyle);
-    TextPainter(text: textSpan, textDirection: TextDirection.ltr)
-      ..layout(minWidth: 0, maxWidth: size.width)
-      ..paint(canvas, Offset(0, 0));
-    canvas.restore();
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter old) {
-    return false;
   }
 }

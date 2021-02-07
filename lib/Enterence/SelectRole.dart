@@ -188,9 +188,41 @@ class _SelectRole extends State<SelectRole> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => top
-                          ? RegisterPage("gonullu")
-                          : RegisterPage("katilimci")),
+                    builder: (context) => top
+                        ? RegisterPage(
+                            "gonullu",
+                            BoxDecoration(
+                              borderRadius: BorderRadius.circular(32),
+                              gradient: LinearGradient(
+                                begin: Alignment(-1.0, 0.0),
+                                end: Alignment(1.0, 0.0),
+                                colors: [
+                                  const Color(0xfffabd5e),
+                                  const Color(0xfff7b053),
+                                  const Color(0xfff49d42),
+                                  const Color(0xfff3963d),
+                                ],
+                                stops: [0.0, 0.232, 0.687, 1.0],
+                              ),
+                            ),
+                          )
+                        : RegisterPage(
+                            "katilimci",
+                            BoxDecoration(
+                              borderRadius: BorderRadius.circular(32),
+                              gradient: LinearGradient(
+                                begin: Alignment(-1.0, 0.0),
+                                end: Alignment(1.0, 0.0),
+                                colors: [
+                                  const Color(0xff6088b0),
+                                  const Color(0xff54789b),
+                                  const Color(0xff405b75)
+                                ],
+                                stops: [0.0, 0.399, 1.0],
+                              ),
+                            ),
+                          ),
+                  ),
                 );
               },
               child: Padding(
@@ -299,9 +331,26 @@ class _SelectRole extends State<SelectRole> {
             GestureDetector(
               onTap: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => RegisterPage("lunar")));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => RegisterPage(
+                      "lunar",
+                      BoxDecoration(
+                        borderRadius: BorderRadius.circular(32),
+                        gradient: LinearGradient(
+                          begin: Alignment(-1.0, 0.0),
+                          end: Alignment(1.0, 0.0),
+                          colors: [
+                            const Color(0xff8a84be),
+                            const Color(0xff7a6fb0),
+                            const Color(0xff6958a1)
+                          ],
+                          stops: [0.0, 0.514, 1.0],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
               },
               child: Padding(
                 padding: const EdgeInsets.only(right: 4, bottom: 8),
