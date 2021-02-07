@@ -11,8 +11,8 @@ class _AraciHomePage extends State<AraciHomePage> {
  AnimationController _controller;
   Animation<double> _animation;
   List images = [
-    "assets/images/Anasayfa görsel.png"
-    "assets/images/Proje Adı Görsel.png"
+    "assets/images/Anasayfa görsel.png",
+    "assets/images/Proje Adı Görsel.png",
   ];
   List<BoxDecoration> colors = [
     BoxDecoration(

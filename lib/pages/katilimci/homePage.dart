@@ -14,8 +14,8 @@ class _KatilimciHomePage extends State<KatilimciHomePage> {
   AnimationController _controller;
   Animation<double> _animation;
   List images = [
-    "assets/images/Anasayfa görsel.png"
-    "assets/images/Proje Adı Görsel.png"
+    "assets/images/Anasayfa görsel.png",
+    "assets/images/Proje Adı Görsel.png",
   ];
 
   @override

@@ -13,8 +13,8 @@ class GonulluHomePage extends StatefulWidget {
 class _GonulluHomePage extends State<GonulluHomePage>
     with TickerProviderStateMixin {
   List images = [
-    "assets/images/Anasayfa görsel.png"
-        "assets/images/Proje Adı Görsel.png"
+    "assets/images/Anasayfa görsel.png",
+        "assets/images/Proje Adı Görsel.png",
   ];
   @override
   Widget build(BuildContext context) {

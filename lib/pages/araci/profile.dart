@@ -283,7 +283,7 @@ class _AraciProfil extends State<AraciProfil> {
       child: Container(
         width: s.width,
         child: Padding(
-          padding: EdgeInsets.only(left: s.width * 0.2),
+          padding: EdgeInsets.only(left: s.width * 0.25),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
