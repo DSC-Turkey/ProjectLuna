@@ -14,17 +14,28 @@ class GonulluProfil extends StatefulWidget {
 class _GonulluProfil extends State<GonulluProfil> {
   final controller = Get.put(FirebaseController());
   bool toggleValue = true;
-
+  FirebaseFirestore firestore;
+  DocumentSnapshot documentSnapshot;
+  void getDatas() async {
+    // SharedPreferences.setMockInitialValues({});
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // id = prefs.getString("userID");
+    documentSnapshot = await firestore
+        .collection("projeler")
+        .doc("rOzYjCDKWNmDwt1wVKX6")
+        .get();
+    print(documentSnapshot.data);
+  }
 
   @override
   void initState() {
+    getDatas();
     // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    
     Size s = MediaQuery.of(context).size;
     return Scaffold(
       floatingActionButton: RaisedButton(

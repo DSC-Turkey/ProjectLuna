@@ -1,3 +1,4 @@
+import 'package:Luna/pages/index.dart';
 import 'package:flutter/material.dart';
 
 class ProjectDetail extends StatefulWidget {
@@ -99,17 +100,22 @@ class _ProjectDetail extends State<ProjectDetail> {
             ),
           ),
         ),
-        Container(
-          width: s.width * 0.4,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25),
-              border: Border.all(color: Colors.white, width: 3)),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              "Projeyi        Başlat",
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white, fontSize: 25),
+        GestureDetector(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>IndexPage(widget.appBar)));
+          },
+          child: Container(
+            width: s.width * 0.4,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25),
+                border: Border.all(color: Colors.white, width: 3)),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                "Projeyi        Başlat",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white, fontSize: 25),
+              ),
             ),
           ),
         ),
