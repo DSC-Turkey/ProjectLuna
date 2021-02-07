@@ -1,3 +1,4 @@
+import 'package:Luna/Constants/colors.dart';
 import 'package:Luna/pages/projectDetail.dart';
 import 'package:Luna/pages/searchPage.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
@@ -8,220 +9,6 @@ class GonulluKesfetPage extends StatefulWidget {
 }
 
 class _GonulluKesfetPage extends State<GonulluKesfetPage> {
-  List<BoxDecoration> colors = [
-    BoxDecoration(
-      borderRadius: BorderRadius.circular(5.54),
-      gradient: LinearGradient(
-        begin: Alignment(1.0, 0.0),
-        end: Alignment(-1.0, 0.0),
-        colors: [
-          const Color(0xffef807e),
-          const Color(0xffe06b72),
-          const Color(0xffd45968)
-        ],
-        stops: [0.0, 0.572, 1.0],
-      ),
-    ),
-    BoxDecoration(
-      borderRadius: BorderRadius.circular(5.54),
-      gradient: LinearGradient(
-        begin: Alignment(1.0, 0.0),
-        end: Alignment(-1.0, 0.0),
-        colors: [
-          const Color(0xff8a84be),
-          const Color(0xff7a6fb0),
-          const Color(0xff6958a1)
-        ],
-        stops: [0.0, 0.514, 1.0],
-      ),
-    ),
-    BoxDecoration(
-      borderRadius: BorderRadius.circular(5.54),
-      gradient: LinearGradient(
-        begin: Alignment(1.0, 0.0),
-        end: Alignment(-1.0, 0.0),
-        colors: [
-          const Color(0xff6088b0),
-          const Color(0xff54789b),
-          const Color(0xff405b75)
-        ],
-        stops: [0.0, 0.399, 1.0],
-      ),
-    ),
-    BoxDecoration(
-      borderRadius: BorderRadius.circular(5.54),
-      gradient: LinearGradient(
-        begin: Alignment(1.0, 0.0),
-        end: Alignment(-1.0, 0.0),
-        colors: [
-          const Color(0xfffabd5e),
-          const Color(0xfff7b053),
-          const Color(0xfff49d42),
-          const Color(0xfff3963d)
-        ],
-        stops: [0.0, 0.232, 0.687, 1.0],
-      ),
-    ),
-  ];
-  List<BoxDecoration> parametrCard = [
-    BoxDecoration(
-      borderRadius: BorderRadius.circular(50),
-      gradient: LinearGradient(
-        begin: Alignment(1.0, 0.0),
-        end: Alignment(-1.0, 0.0),
-        colors: [
-          const Color(0xffef807e),
-          const Color(0xffe06b72),
-          const Color(0xffd45968)
-        ],
-        stops: [0.0, 0.572, 1.0],
-      ),
-    ),
-    BoxDecoration(
-      borderRadius: BorderRadius.circular(50),
-      gradient: LinearGradient(
-        begin: Alignment(1.0, 0.0),
-        end: Alignment(-1.0, 0.0),
-        colors: [
-          const Color(0xff8a84be),
-          const Color(0xff7a6fb0),
-          const Color(0xff6958a1)
-        ],
-        stops: [0.0, 0.514, 1.0],
-      ),
-    ),
-    BoxDecoration(
-      borderRadius: BorderRadius.circular(50),
-      gradient: LinearGradient(
-        begin: Alignment(1.0, 0.0),
-        end: Alignment(-1.0, 0.0),
-        colors: [
-          const Color(0xff6088b0),
-          const Color(0xff54789b),
-          const Color(0xff405b75)
-        ],
-        stops: [0.0, 0.399, 1.0],
-      ),
-    ),
-    BoxDecoration(
-      borderRadius: BorderRadius.circular(50),
-      gradient: LinearGradient(
-        begin: Alignment(1.0, 0.0),
-        end: Alignment(-1.0, 0.0),
-        colors: [
-          const Color(0xfffabd5e),
-          const Color(0xfff7b053),
-          const Color(0xfff49d42),
-          const Color(0xfff3963d)
-        ],
-        stops: [0.0, 0.232, 0.687, 1.0],
-      ),
-    ),
-  ];
-  List<BoxDecoration> parametrAppBar = [
-    BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment(1.0, 0.0),
-        end: Alignment(-1.0, 0.0),
-        colors: [
-          const Color(0xffef807e),
-          const Color(0xffe06b72),
-          const Color(0xffd45968)
-        ],
-        stops: [0.0, 0.572, 1.0],
-      ),
-    ),
-    BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment(1.0, 0.0),
-        end: Alignment(-1.0, 0.0),
-        colors: [
-          const Color(0xff8a84be),
-          const Color(0xff7a6fb0),
-          const Color(0xff6958a1)
-        ],
-        stops: [0.0, 0.514, 1.0],
-      ),
-    ),
-    BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment(1.0, 0.0),
-        end: Alignment(-1.0, 0.0),
-        colors: [
-          const Color(0xff6088b0),
-          const Color(0xff54789b),
-          const Color(0xff405b75)
-        ],
-        stops: [0.0, 0.399, 1.0],
-      ),
-    ),
-    BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment(1.0, 0.0),
-        end: Alignment(-1.0, 0.0),
-        colors: [
-          const Color(0xfffabd5e),
-          const Color(0xfff7b053),
-          const Color(0xfff49d42),
-          const Color(0xfff3963d)
-        ],
-        stops: [0.0, 0.232, 0.687, 1.0],
-      ),
-    ),
-  ];
-  List<BoxDecoration> subColors = [
-    BoxDecoration(
-      shape: BoxShape.circle,
-      gradient: LinearGradient(
-        begin: Alignment(1.0, 0.0),
-        end: Alignment(-1.0, 0.0),
-        colors: [
-          const Color(0xffef807e),
-          const Color(0xffe06b72),
-          const Color(0xffd45968)
-        ],
-        stops: [0.0, 0.572, 1.0],
-      ),
-    ),
-    BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment(1.0, 0.0),
-          end: Alignment(-1.0, 0.0),
-          colors: [
-            const Color(0xff8a84be),
-            const Color(0xff7a6fb0),
-            const Color(0xff6958a1)
-          ],
-          stops: [0.0, 0.514, 1.0],
-        ),
-        shape: BoxShape.circle),
-    BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment(1.0, 0.0),
-          end: Alignment(-1.0, 0.0),
-          colors: [
-            const Color(0xff6088b0),
-            const Color(0xff54789b),
-            const Color(0xff405b75)
-          ],
-          stops: [0.0, 0.399, 1.0],
-        ),
-        shape: BoxShape.circle),
-    BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment(1.0, 0.0),
-          end: Alignment(-1.0, 0.0),
-          colors: [
-            const Color(0xfffabd5e),
-            const Color(0xfff7b053),
-            const Color(0xfff49d42),
-            const Color(0xfff3963d)
-          ],
-          stops: [0.0, 0.232, 0.687, 1.0],
-        ),
-        shape: BoxShape.circle),
-  ];
-
   final textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -229,7 +16,7 @@ class _GonulluKesfetPage extends State<GonulluKesfetPage> {
     return Container(
       color: Colors.white,
       child: SafeArea(
-            child: Scaffold(
+        child: Scaffold(
           body: randomActiveProject(s),
         ),
       ),
@@ -240,7 +27,7 @@ class _GonulluKesfetPage extends State<GonulluKesfetPage> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
           child: AnimSearchBar(
             helpText: "Luna'da Ara",
             rtl: true,
@@ -254,7 +41,7 @@ class _GonulluKesfetPage extends State<GonulluKesfetPage> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top:20.0),
+          padding: const EdgeInsets.only(top: 20.0),
           child: Container(
             height: s.height * 0.8,
             width: s.width,
@@ -327,6 +114,7 @@ class _GonulluKesfetPage extends State<GonulluKesfetPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(),
+              SizedBox(width: 10),
               cardDatas(),
             ],
           ),

@@ -112,15 +112,6 @@ class _Base extends State<GonulluBase> {
             ],
           ),
         ),
-        // bottomNavigationBar: BottomNavigationBar(
-        //   items: [
-        //     BottomNavigationBarItem(icon: Icon(Icons.ac_unit), title: Text("")),
-        //     BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("")),
-        //     BottomNavigationBarItem(icon: Icon(Icons.ac_unit), title: Text("")),
-        //   ],
-        //   currentIndex: _currentIndex,
-        //   onTap: _onItemTapped,
-        // ),
         body: pages[_currentIndex],
       ),
     );

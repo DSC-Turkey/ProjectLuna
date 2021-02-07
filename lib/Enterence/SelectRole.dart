@@ -1,6 +1,8 @@
+import 'package:Luna/Enterence/Login.dart';
 import 'package:Luna/Enterence/RegisterPage.dart';
 import "package:flutter/material.dart";
 import 'package:flip_card/flip_card.dart';
+import 'package:get/get.dart';
 
 class SelectRole extends StatefulWidget {
   @override
@@ -43,27 +45,6 @@ class _SelectRole extends State<SelectRole> {
                   backToLogin(),
                 ],
               )
-              // RaisedButton(
-              //   onPressed: () => Get.offAll(
-              //     RegisterPage("katilimci"),
-              //   ),
-              //   child: Text("Katılımcı Ol "),
-              //   color: Colors.orange,
-              // ),
-              // RaisedButton(
-              //   onPressed: () => Get.offAll(
-              //     RegisterPage("gonullu"),
-              //   ),
-              //   child: Text("Gönüllü Ol "),
-              //   color: Colors.orange,
-              // ),
-              // RaisedButton(
-              //   onPressed: () => Get.offAll(
-              //     RegisterPage("egitmen"),
-              //   ),
-              //   child: Text("Eğitmen Ol "),
-              //   color: Colors.orange,
-              // ),
             ],
           ),
         ),
@@ -79,12 +60,17 @@ class _SelectRole extends State<SelectRole> {
           "Zaten Hesabın Var Mı?  ",
           style: TextStyle(fontSize: 22),
         ),
-        Text(
-          "Giriş Yap",
-          style: TextStyle(
-              fontSize: 22,
-              decoration: TextDecoration.underline,
-              fontWeight: FontWeight.bold),
+        FlatButton(
+          onPressed: () {
+            Get.offAll(LoginPage());
+          },
+          child: Text(
+            "Giriş Yap",
+            style: TextStyle(
+                fontSize: 22,
+                decoration: TextDecoration.underline,
+                fontWeight: FontWeight.bold),
+          ),
         ),
       ],
     );
@@ -207,7 +193,7 @@ class _SelectRole extends State<SelectRole> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => top
+                    builder: (context) => !top
                         ? RegisterPage(
                             "GÖNÜLLÜ",
                             BoxDecoration(

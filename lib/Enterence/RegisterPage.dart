@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 class RegisterPage extends GetWidget<FirebaseController> {
   var decoration;
   final String role;
+
   RegisterPage(this.role, this.decoration);
   String firstn, lastn, email, pass;
   bool passwordVisible = true;
@@ -21,9 +22,11 @@ class RegisterPage extends GetWidget<FirebaseController> {
   final cityController = TextEditingController();
   final passController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     Size s = MediaQuery.of(context).size;
+    print("$role");
     return Scaffold(
       floatingActionButton: GestureDetector(
         onTap: () {
@@ -105,6 +108,7 @@ class RegisterPage extends GetWidget<FirebaseController> {
                     textField(cityController, "Şehir", false),
                     text("Şifre Giriniz"),
                     textField(passController, "Şifre Giriniz", true),
+                    SizedBox(height: s.height * 0.1),
                   ],
                 ),
               ],
@@ -116,7 +120,14 @@ class RegisterPage extends GetWidget<FirebaseController> {
   }
 
   void registerUser() {
-    controller.createUser(firstn, lastn, email, pass, role);
+    controller.createUser(
+        nameController.text,
+        lastNameController.text,
+        mailController.text,
+        phoneController.text,
+        cityController.text,
+        passController.text,
+        role);
   }
 
   text(String text) {
@@ -130,28 +141,25 @@ class RegisterPage extends GetWidget<FirebaseController> {
   }
 
   textField(TextEditingController controller, String text, bool isPass) {
+    final fBcontroller = Get.put(FirebaseController());
     return Padding(
       padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-      child: MyTextFormField(
-        // hintText: text,
-        // labelText: text,
-        controller: controller,
-        onSaved: (String val) {
-          email = val;
-        },
-        suffixIcon: isPass
-            ? IconButton(
-                icon: Icon(
-                  Icons.visibility,
-                ),
-                onPressed: () {})
-            : IconButton(
-                icon: Icon(
-                  Icons.visibility,
-                  color: Colors.white,
-                ),
-                onPressed: () {},
-              ),
+      child: GetBuilder<FirebaseController>(
+        builder: (_) => MyTextFormField(
+            isPassword: isPass ? fBcontroller.passMode : false,
+            controller: controller,
+            suffixIcon: isPass
+                ? IconButton(
+                    icon: Icon(
+                      fBcontroller.passMode
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      color: Colors.grey,
+                    ),
+                    onPressed: () {
+                      fBcontroller.passModeChange();
+                    })
+                : null),
       ),
     );
   }

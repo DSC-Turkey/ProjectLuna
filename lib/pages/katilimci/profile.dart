@@ -1,5 +1,4 @@
 import 'package:Luna/GetX/FirabaseController.dart';
-import 'package:Luna/pages/araci/createProject.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,6 +11,7 @@ class KatilimciProfil extends StatefulWidget {
 
 class _KatilimciProfil extends State<KatilimciProfil> {
   final controller = Get.put(FirebaseController());
+  Map<String, dynamic> data = {};
   bool toggleValue = true;
   FirebaseFirestore firestore;
   DocumentSnapshot documentSnapshot;
@@ -35,28 +35,39 @@ class _KatilimciProfil extends State<KatilimciProfil> {
     print("a");
     Size s = MediaQuery.of(context).size;
     return Scaffold(
-      floatingActionButton: RaisedButton(
+      floatingActionButton: FloatingActionButton(
         onPressed: () {
           controller.signout();
         },
-        color: Colors.red,
-        child: Text(
-          "Çıkış yap",
-          style: textStyle(
-            25,
-            Colors.white,
-          ),
-        ),
+        backgroundColor: Colors.red,
+        child: Icon(Icons.exit_to_app, color: Colors.white),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          languegeSelector(),
-          centerOfPage(s),
-        ],
-      ),
+      body: FutureBuilder<DocumentSnapshot>(
+          future: FirebaseFirestore.instance
+              .collection('kullaniciler')
+              .doc("${controller.currentUser.uid}")
+              .get(),
+          builder: (context, snapshot) {
+            data = snapshot.data.data();
+            if (snapshot.hasError) {
+              return Text('Something went wrong');
+            }
+
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
+            }
+            if (snapshot.hasData) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  //  languegeSelector(),
+                  centerOfPage(s),
+                ],
+              );
+            }
+          }),
     );
   }
 
@@ -91,7 +102,7 @@ class _KatilimciProfil extends State<KatilimciProfil> {
         children: [
           Center(
             child: Container(
-              height: s.height * 0.7,
+              height: s.height * 0.75,
               width: s.width * 0.9,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
@@ -107,21 +118,21 @@ class _KatilimciProfil extends State<KatilimciProfil> {
                 ),
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   userDatas(s),
                   editMyProfileButton(),
-                  Container(
-                    height: s.height * 0.55,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        userStatics(s),
-                        buttons(s),
-                      ],
-                    ),
-                  )
+                  Spacer(),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      userStatics(s),
+                      SizedBox(height: 20),
+                      buttons(s),
+                    ],
+                  ),
+                  Spacer(),
                 ],
               ),
             ),
@@ -138,21 +149,12 @@ class _KatilimciProfil extends State<KatilimciProfil> {
       padding: const EdgeInsets.only(right: 8.0),
       child: Align(
         alignment: Alignment.topRight,
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(
-              color: Colors.grey[700],
-            ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(3.0),
+        child: OutlineButton(
+            onPressed: () {},
             child: Text(
               "Profili Düzenle",
-              style: textStyle(20, Colors.white),
-            ),
-          ),
-        ),
+              style: textStyle(15, Colors.white),
+            )),
       ),
     );
   }
@@ -195,35 +197,26 @@ class _KatilimciProfil extends State<KatilimciProfil> {
   }
 
   buttons(Size s) {
-    return Container(
-      width: s.width * 0.9,
-      height: s.height * 0.25,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          GestureDetector(
-            child: Container(
-              width: s.width * 0.8,
-              decoration: BoxDecoration(
-                color: Color(0xFFF2F4F6),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 15.0, horizontal: 16),
-                child: Center(
-                  child: Text(
-                    "Projeler",
-                    style: textStyle(
-                      30,
-                      Colors.grey[800],
-                    ),
-                  ),
-                ),
+    return GestureDetector(
+      child: Container(
+        width: s.width * 0.8,
+        height: s.width * .15,
+        decoration: BoxDecoration(
+          color: Color(0xFFF2F4F6),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 16),
+          child: Center(
+            child: Text(
+              "Projeler",
+              style: textStyle(
+                30,
+                Colors.grey[800],
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
@@ -231,38 +224,33 @@ class _KatilimciProfil extends State<KatilimciProfil> {
   userStatics(Size s) {
     return Container(
       height: s.height * 0.3,
-      child: Padding(
-        padding: const EdgeInsets.only(left: 16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 50),
-            Text(
-              "Lorem İpsum dolar sit amet Lorem İpsum dolar sit amet Lorem İpsum dolar sit amet Lorem İpsum dolar sit amet",
-              style: textStyle(
-                22,
-                Colors.grey[100],
-              ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 50),
+          Text(
+            data["about"],
+            style: textStyle(
+              22,
+              Colors.grey[100],
             ),
-            Spacer(),
-            Text(
-              "Aktif Proje Sayısı: 4",
-              style: textStyle(
-                22,
-                Colors.grey[100],
-              ),
+          ),
+          Text(
+            "Aktif Proje Sayısı: ${data["currentPorjectNumber"]}",
+            style: textStyle(
+              22,
+              Colors.grey[100],
             ),
-            SizedBox(height: 10),
-            Text(
-              "Tamamlanan Proje Sayısı: 4",
-              style: textStyle(
-                22,
-                Colors.grey[100],
-              ),
+          ),
+          Text(
+            "Tamamlanan Proje Sayısı: ${data["complatedProjectNumber"]}",
+            style: textStyle(
+              22,
+              Colors.grey[100],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -273,34 +261,23 @@ class _KatilimciProfil extends State<KatilimciProfil> {
 
   userDatas(Size s) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.only(left: s.width * 0.36),
       child: Container(
-        width: s.width,
+        height: s.height * 0.1,
+        width: s.width * 0.6,
         child: Padding(
-          padding: EdgeInsets.only(left: s.width * 0.2),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          padding: const EdgeInsets.only(top: 16.0, bottom: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-                height: s.height * 0.1,
-                width: s.width * 0.4,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        "Tahir Uzelli",
-                        style: textStyle(28, Colors.white),
-                      ),
-                      Text(
-                        "Gönüllü",
-                        style: textStyle(25, Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
+              Text(
+                "${data["firstname"]} ${data["lastname"]}",
+                style: textStyle(24, Colors.white),
+              ),
+              Text(
+                "${data["userRole"]} ",
+                style: textStyle(20, Colors.white),
               ),
             ],
           ),

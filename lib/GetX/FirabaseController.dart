@@ -1,6 +1,9 @@
+import 'package:Luna/pages/araci/base.dart';
 import 'package:Luna/pages/base.dart';
 
 import 'package:Luna/Enterence/Login.dart';
+import 'package:Luna/pages/gonullu/base.dart';
+import 'package:Luna/pages/katilimci/base.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,13 +13,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseController extends GetxController {
   FirebaseAuth _auth = FirebaseAuth.instance;
-  SharedPreferences prefs;
+  bool passMode = true;
+
+  void passModeChange() {
+    print("sddss");
+    passMode = !passMode;
+    update();
+  }
+
+  DocumentReference myUser;
   GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
   Rx<User> _firebaseUser = Rx<User>();
 
-  FirebaseAuth get currentUser => _auth;
+  User get currentUser => _auth.currentUser;
   String get user => _firebaseUser.value?.email;
-  String get imageurl => _firebaseUser.value?.photoURL;
 
   @override
   void onInit() {
@@ -29,9 +39,8 @@ class FirebaseController extends GetxController {
 
   // function to createuser, login and sign out user
 
-  void createUser(String firstname, String lastname, String email,
-      String password, String role) async {
-    prefs = await SharedPreferences.getInstance();
+  void createUser(String firstname, lastname, email, phoneNumber, city,
+      password, role) async {
     try {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
@@ -44,11 +53,23 @@ class FirebaseController extends GetxController {
           "firstname": firstname,
           "lastname": lastname,
           "email": email,
+          "phoneNumber": phoneNumber,
+          "city": city,
+          "about": "Bu kişi henüz hakkında kısmını doldurmadı",
+          "currentPorjectNumber": 0,
+          "complatedProjectNumber": 0,
           "userRole": role,
         });
-        prefs.setString("UserID", value.user.uid);
       }).then((value) {
-        Get.offAll(Base());
+        if (role == "Lunar") {
+          Get.offAll(AraciBase());
+        }
+        if (role == "Katılımcı") {
+          Get.offAll(KatilimciBase());
+        }
+        if (role == "Gönüllü") {
+          Get.offAll(GonulluBase());
+        }
       });
 
       // reference.add(userdata).then((value) => Get.offAll(Base()));
@@ -73,10 +94,29 @@ class FirebaseController extends GetxController {
   }
 
   void login(String email, String password) async {
+    String uid = "";
     try {
       await _auth
           .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) => Get.offAll(Base()));
+          .then((value) {
+        uid = value.user.uid;
+
+        FirebaseFirestore.instance
+            .collection('kullaniciler')
+            .doc(value.user.uid)
+            .get()
+            .then((DocumentSnapshot documentSnapshot) {
+          if (documentSnapshot.data()['userRole'] == "Lunar") {
+            Get.offAll(AraciBase());
+          }
+          if (documentSnapshot.data()['userRole'] == "Katılımcı") {
+            Get.offAll(KatilimciBase());
+          }
+          if (documentSnapshot.data()['userRole'] == "Gönüllü") {
+            Get.offAll(GonulluBase());
+          }
+        });
+      }).whenComplete(() {});
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         Get.snackbar("Kullanıcı bulunamadı",
