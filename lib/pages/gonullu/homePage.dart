@@ -13,9 +13,8 @@ class GonulluHomePage extends StatefulWidget {
 class _GonulluHomePage extends State<GonulluHomePage>
     with TickerProviderStateMixin {
   List images = [
-    "https://www.idecad.com.tr/images/icerik/9.jpg",
-    "https://www.mesa.com.tr/img/gelecekprojelerImg.png",
-    "https://chainpm.com/uploads/uygulama-projesi-ve-kesin-proje-arasindaki-farklar-5d381b65bb0e8.png",
+    "assets/images/Anasayfa görsel.png"
+        "assets/images/Proje Adı Görsel.png"
   ];
   @override
   Widget build(BuildContext context) {
@@ -68,7 +67,7 @@ class _GonulluHomePage extends State<GonulluHomePage>
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.0),
         image: DecorationImage(
-          image: NetworkImage(imageUrl),
+          image: AssetImage(imageUrl),
           fit: BoxFit.cover,
         ),
       ),
