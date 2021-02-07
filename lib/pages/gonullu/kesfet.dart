@@ -256,7 +256,7 @@ class _GonulluKesfetPage extends State<GonulluKesfetPage> {
         Padding(
           padding: const EdgeInsets.only(top:20.0),
           child: Container(
-            height: s.height * 0.9,
+            height: s.height * 0.8,
             width: s.width,
             child: ListView.builder(
                 itemCount: 30,

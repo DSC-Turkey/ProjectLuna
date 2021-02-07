@@ -16,14 +16,20 @@ class _GonulluProfil extends State<GonulluProfil> {
   Widget build(BuildContext context) {
     Size s = MediaQuery.of(context).size;
     return Scaffold(
-      // floatingActionButton: RaisedButton(
-      //   onPressed: () {
-      //     controller.signout();
-      //   },
-      //   color: Colors.red,
-      //   child: Text("Çıkış yap"),
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: RaisedButton(
+        onPressed: () {
+          controller.signout();
+        },
+        color: Colors.red,
+        child: Text(
+          "Çıkış yap",
+          style: textStyle(
+            25,
+            Colors.white,
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -34,29 +40,6 @@ class _GonulluProfil extends State<GonulluProfil> {
       ),
     );
   }
-
-  // languegeSelector() {
-  //   return Row(
-  //     mainAxisAlignment: MainAxisAlignment.end,
-  //     children: [
-  //       toggleValue ? Text("EN") : Text("TR"),
-  //       Text(
-  //         "  |",
-  //         style: textStyle(20, Colors.grey),
-  //       ),
-  //       Switch(
-  //         value: toggleValue,
-  //         onChanged: (value) {
-  //           setState(() {
-  //             toggleValue = !toggleValue;
-  //           });
-  //         },
-  //         activeTrackColor: Color(0xFF596ee1),
-  //         activeColor: Colors.white,
-  //       ),
-  //     ],
-  //   );
-  // }
 
   languegeSelector() {
     return Padding(
