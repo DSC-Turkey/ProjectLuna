@@ -13,6 +13,7 @@ class FirebaseController extends GetxController {
   GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
   Rx<User> _firebaseUser = Rx<User>();
 
+  FirebaseAuth get currentUser => _auth;
   String get user => _firebaseUser.value?.email;
   String get imageurl => _firebaseUser.value?.photoURL;
 
@@ -27,14 +28,12 @@ class FirebaseController extends GetxController {
 
   // function to createuser, login and sign out user
 
-  void createUser(
-      String firstname, String lastname, String email, String password, String role) async {
+  void createUser(String firstname, String lastname, String email,
+      String password, String role) async {
     try {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
-     
-
         FirebaseFirestore.instance
             .collection("kullaniciler")
             .doc(value.user.uid)
@@ -44,8 +43,6 @@ class FirebaseController extends GetxController {
           "lastname": lastname,
           "email": email,
           "userRole": role,
-      
-         
         });
       }).then((value) => Get.offAll(Base()));
 
