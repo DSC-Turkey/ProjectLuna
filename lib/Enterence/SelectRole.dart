@@ -190,7 +190,7 @@ class _SelectRole extends State<SelectRole> {
                   MaterialPageRoute(
                     builder: (context) => top
                         ? RegisterPage(
-                            "gonullu",
+                            "Gönüllü",
                             BoxDecoration(
                               borderRadius: BorderRadius.circular(32),
                               gradient: LinearGradient(
@@ -207,7 +207,7 @@ class _SelectRole extends State<SelectRole> {
                             ),
                           )
                         : RegisterPage(
-                            "katilimci",
+                            "Katılımcı",
                             BoxDecoration(
                               borderRadius: BorderRadius.circular(32),
                               gradient: LinearGradient(
@@ -334,7 +334,7 @@ class _SelectRole extends State<SelectRole> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => RegisterPage(
-                      "lunar",
+                      "Lunar",
                       BoxDecoration(
                         borderRadius: BorderRadius.circular(32),
                         gradient: LinearGradient(

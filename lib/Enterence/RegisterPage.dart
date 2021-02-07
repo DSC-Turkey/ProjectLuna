@@ -33,15 +33,15 @@ class RegisterPage extends GetWidget<FirebaseController> {
           if (mailController.text.isEmail) {
             if (passController.text.length >= 7) {
               registerUser();
-              if (role == "lunar") {
+              if (role == "Lunar") {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => AraciBase()));
               }
-              if (role == "katilimci") {
+              if (role == "Katılımcı") {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => KatilimciBase()));
               }
-              if (role == "gonullu") {
+              if (role == "Gönüllü") {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => GonulluBase()));
               }
@@ -62,7 +62,7 @@ class RegisterPage extends GetWidget<FirebaseController> {
           decoration: decoration,
           child: Center(
             child: Text(
-              "GÖNÜLLÜ OL",
+              "$role Ol",
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
           ),
@@ -98,7 +98,7 @@ class RegisterPage extends GetWidget<FirebaseController> {
                       Padding(
                         padding: const EdgeInsets.only(top: 4.0),
                         child: Text(
-                          "GÖNÜLLÜ OL",
+                          "$role OL",
                           style: TextStyle(color: Colors.white, fontSize: 22),
                         ),
                       )
