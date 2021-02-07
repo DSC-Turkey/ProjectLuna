@@ -56,8 +56,8 @@ class _Base extends State<Base> {
                     ),
                   ),
                   width: s.width * 0.09,
-                  child: SvgPicture.asset(
-                    "assets/icons/navbar/search.svg",
+                  child: Image.asset(
+                    "assets/icons/navbar/Keşfet.png",
                     color: Color(0xFFef807e),
                   ),
                 ),
