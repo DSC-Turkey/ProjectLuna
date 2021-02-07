@@ -1,17 +1,17 @@
-import 'package:Luna/Enterence/Login.dart';
 import 'package:Luna/GetX/FirabaseController.dart';
-import 'package:Luna/Widgets/SocialLogin.dart';
-import 'package:Luna/pages/base.dart';
+import 'package:Luna/pages/araci/base.dart';
+import 'package:Luna/pages/gonullu/base.dart';
+import 'package:Luna/pages/katilimci/base.dart';
 import 'package:Luna/widgets/myTextField.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 
 class RegisterPage extends GetWidget<FirebaseController> {
+  var decoration;
   final String role;
-  RegisterPage(this.role);
+  RegisterPage(this.role, this.decoration);
   String firstn, lastn, email, pass;
   bool passwordVisible = true;
   final nameController = TextEditingController();
@@ -26,26 +26,24 @@ class RegisterPage extends GetWidget<FirebaseController> {
     Size s = MediaQuery.of(context).size;
     return Scaffold(
       floatingActionButton: GestureDetector(
-        onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>Base()));
+        onTap: () {
+          if (role == "lunar") {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => AraciBase()));
+          }
+          if (role == "katilimci") {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => KatilimciBase()));
+          }
+          if (role == "gonullu") {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => GonulluBase()));
+          }
         },
         child: Container(
           width: s.width * 0.4,
           height: s.height * 0.07,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            gradient: LinearGradient(
-              begin: Alignment(-1.0, 0.0),
-              end: Alignment(1.0, 0.0),
-              colors: [
-                const Color(0xfffabd5e),
-                const Color(0xfff7b053),
-                const Color(0xfff49d42),
-                const Color(0xfff3963d),
-              ],
-              stops: [0.0, 0.232, 0.687, 1.0],
-            ),
-          ),
+          decoration: decoration,
           child: Center(
             child: Text(
               "GÖNÜLLÜ OL",
@@ -66,19 +64,7 @@ class RegisterPage extends GetWidget<FirebaseController> {
                 Container(
                   height: s.height * 0.06,
                   width: s.width,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment(-1.0, 0.0),
-                      end: Alignment(1.0, 0.0),
-                      colors: [
-                        const Color(0xfffabd5e),
-                        const Color(0xfff7b053),
-                        const Color(0xfff49d42),
-                        const Color(0xfff3963d),
-                      ],
-                      stops: [0.0, 0.232, 0.687, 1.0],
-                    ),
-                  ),
+                  decoration: decoration,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -147,25 +133,26 @@ class RegisterPage extends GetWidget<FirebaseController> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
       child: MyTextFormField(
-          // hintText: text,
-          // labelText: text,
-          controller: controller,
-          onSaved: (String val) {
-            email = val;
-          },
-          suffixIcon: isPass
-              ? IconButton(
-                  icon: Icon(
-                    Icons.visibility,
-                    color: Color(0xfff49d42),
-                  ),
-                  onPressed: () {})
-              : IconButton(
-                  icon: Icon(
-                    Icons.visibility,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {})),
+        // hintText: text,
+        // labelText: text,
+        controller: controller,
+        onSaved: (String val) {
+          email = val;
+        },
+        suffixIcon: isPass
+            ? IconButton(
+                icon: Icon(
+                  Icons.visibility,
+                ),
+                onPressed: () {})
+            : IconButton(
+                icon: Icon(
+                  Icons.visibility,
+                  color: Colors.white,
+                ),
+                onPressed: () {},
+              ),
+      ),
     );
   }
 }
