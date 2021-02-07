@@ -191,10 +191,15 @@ class _SelectRole extends State<SelectRole> {
               width: s.width * 0.6,
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
-                child: Text(
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been ",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
+                child: top
+                    ? Text(
+                        "Hemen gönüllü olarak,  bir çok katılımcının hayatına etkide bulun",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      )
+                    : Text(
+                        "Şimdi ailemize katılarak, ihtiyaç duyduğun tüm eğitime ulaşabilirsin",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
               ),
             ),
             GestureDetector(
@@ -204,7 +209,7 @@ class _SelectRole extends State<SelectRole> {
                   MaterialPageRoute(
                     builder: (context) => top
                         ? RegisterPage(
-                            "gonullu",
+                            "GÖNÜLLÜ",
                             BoxDecoration(
                               borderRadius: BorderRadius.circular(32),
                               gradient: LinearGradient(
@@ -221,7 +226,7 @@ class _SelectRole extends State<SelectRole> {
                             ),
                           )
                         : RegisterPage(
-                            "katilimci",
+                            "KATILIMCI",
                             BoxDecoration(
                               borderRadius: BorderRadius.circular(32),
                               gradient: LinearGradient(
@@ -337,7 +342,7 @@ class _SelectRole extends State<SelectRole> {
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been ",
+                  "Hemen LUNAR ol ve bir çok gönüllü ile katılımcının arasındaki bağı kur.",
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ),
@@ -348,7 +353,7 @@ class _SelectRole extends State<SelectRole> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => RegisterPage(
-                      "lunar",
+                      "LUNAR",
                       BoxDecoration(
                         borderRadius: BorderRadius.circular(32),
                         gradient: LinearGradient(

@@ -27,15 +27,15 @@ class RegisterPage extends GetWidget<FirebaseController> {
     return Scaffold(
       floatingActionButton: GestureDetector(
         onTap: () {
-          if (role == "lunar") {
+          if (role == "LUNAR") {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => AraciBase()));
           }
-          if (role == "katilimci") {
+          if (role == "KATILIMCI") {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => KatilimciBase()));
           }
-          if (role == "gonullu") {
+          if (role == "GÖNÜLLÜ") {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => GonulluBase()));
           }
@@ -46,7 +46,7 @@ class RegisterPage extends GetWidget<FirebaseController> {
           decoration: decoration,
           child: Center(
             child: Text(
-              "GÖNÜLLÜ OL",
+              "$role OL",
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
           ),
@@ -82,7 +82,7 @@ class RegisterPage extends GetWidget<FirebaseController> {
                       Padding(
                         padding: const EdgeInsets.only(top: 4.0),
                         child: Text(
-                          "GÖNÜLLÜ OL",
+                          "$role OL",
                           style: TextStyle(color: Colors.white, fontSize: 22),
                         ),
                       )
