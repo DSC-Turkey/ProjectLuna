@@ -1,19 +1,15 @@
-import 'package:Luna/Enterence/Login.dart';
 import 'package:Luna/GetX/FirabaseController.dart';
-import 'package:Luna/Widgets/SocialLogin.dart';
 import 'package:Luna/pages/base.dart';
 import 'package:Luna/widgets/myTextField.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 
 class RegisterPage extends GetWidget<FirebaseController> {
   final String role;
   RegisterPage(this.role);
-  String firstn, lastn, email, pass;
-  bool passwordVisible = true;
+
   final nameController = TextEditingController();
   final lastNameController = TextEditingController();
   final mailController = TextEditingController();
@@ -21,13 +17,27 @@ class RegisterPage extends GetWidget<FirebaseController> {
   final cityController = TextEditingController();
   final passController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     Size s = MediaQuery.of(context).size;
+    print("$role");
     return Scaffold(
       floatingActionButton: GestureDetector(
-        onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>Base()));
+        onTap: () {
+          if (mailController.text.isEmail) {
+            if (passController.text.length >= 7) {
+              registerUser();
+            } else {
+              Get.snackbar(
+                  "Güçsüz Şifre ", "Lütfen en az 7 haneli bir şifre giriniz. ",
+                  colorText: Colors.white, backgroundColor: Colors.red);
+            }
+          } else {
+            Get.snackbar("Geçersiz E posta ",
+                "Lütfen geçerli bir formatta e posta giriniz. ",
+                colorText: Colors.white, backgroundColor: Colors.red);
+          }
         },
         child: Container(
           width: s.width * 0.4,
@@ -119,6 +129,7 @@ class RegisterPage extends GetWidget<FirebaseController> {
                     textField(cityController, "Şehir", false),
                     text("Şifre Giriniz"),
                     textField(passController, "Şifre Giriniz", true),
+                    SizedBox(height: s.height * 0.1),
                   ],
                 ),
               ],
@@ -130,7 +141,14 @@ class RegisterPage extends GetWidget<FirebaseController> {
   }
 
   void registerUser() {
-    controller.createUser(firstn, lastn, email, pass, role);
+    controller.createUser(
+        nameController.text,
+        lastNameController.text,
+        mailController.text,
+        phoneController.text,
+        cityController.text,
+        passController.text,
+        role);
   }
 
   text(String text) {
@@ -144,28 +162,27 @@ class RegisterPage extends GetWidget<FirebaseController> {
   }
 
   textField(TextEditingController controller, String text, bool isPass) {
+    final fBcontroller = Get.put(FirebaseController());
     return Padding(
-      padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-      child: MyTextFormField(
-          // hintText: text,
-          // labelText: text,
-          controller: controller,
-          onSaved: (String val) {
-            email = val;
-          },
-          suffixIcon: isPass
-              ? IconButton(
-                  icon: Icon(
-                    Icons.visibility,
-                    color: Color(0xfff49d42),
-                  ),
-                  onPressed: () {})
-              : IconButton(
-                  icon: Icon(
-                    Icons.visibility,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {})),
-    );
+        padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+        child: GetBuilder<FirebaseController>(
+          builder: (_) => MyTextFormField(
+              // hintText: text,
+              // labelText: text,
+              isPassword: isPass ? fBcontroller.passMode : false,
+              controller: controller,
+              suffixIcon: isPass
+                  ? IconButton(
+                      icon: Icon(
+                        fBcontroller.passMode
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: Colors.grey,
+                      ),
+                      onPressed: () {
+                        fBcontroller.passModeChange();
+                      })
+                  : null),
+        ));
   }
 }

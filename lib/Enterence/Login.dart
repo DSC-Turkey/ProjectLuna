@@ -1,7 +1,4 @@
-import 'package:Luna/Enterence/ForgetPass.dart';
-import 'package:Luna/Enterence/RegisterPage.dart';
 import 'package:Luna/GetX/FirabaseController.dart';
-import 'package:Luna/Widgets/SocialLogin.dart';
 import 'package:Luna/widgets/myTextField.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -64,29 +61,32 @@ class LoginPage extends GetWidget<FirebaseController> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-                        child: MyTextFormField(
-                          validator: (String val) {
-                            if (val.length <= 0) {
-                              return "Şifre boş bırakılamaz";
-                            }
-                            return null;
-                          },
-                          onSaved: (String val) {
-                            pass = val;
-                          },
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              passwordVisible
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: Colors.grey,
+                          padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                          child: GetBuilder<FirebaseController>(
+                            builder: (_) => MyTextFormField(
+                              validator: (String val) {
+                                if (val.length <= 0) {
+                                  return "Şifre boş bırakılamaz";
+                                }
+                                return null;
+                              },
+                              onSaved: (String val) {
+                                pass = val;
+                              },
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  controller.passMode
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: () {
+                                  controller.passModeChange();
+                                },
+                              ),
+                              isPassword: controller.passMode,
                             ),
-                            onPressed: () {},
-                          ),
-                          isPassword: passwordVisible,
-                        ),
-                      ),
+                          )),
                       SizedBox(height: 20),
                       Center(
                         child: GestureDetector(
@@ -144,11 +144,6 @@ class LoginPage extends GetWidget<FirebaseController> {
                   ),
                 ],
               ),
-              // Container(
-              //   height: 1,
-              //   width: s.width,
-              //   color: Colors.grey[500],
-              // )
             ],
           ),
         ),
