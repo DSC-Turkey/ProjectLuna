@@ -188,7 +188,7 @@ class _SelectRole extends State<SelectRole> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => top
+                    builder: (context) => !top
                         ? RegisterPage(
                             "Gönüllü",
                             BoxDecoration(

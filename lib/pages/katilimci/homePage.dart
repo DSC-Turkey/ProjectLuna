@@ -34,25 +34,6 @@ class _KatilimciHomePage extends State<KatilimciHomePage> {
     );
   }
 
-  createProject(Size s) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Align(
-        alignment: Alignment.centerRight,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.pink[100],
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Text("Proje Oluştur"),
-          ),
-        ),
-      ),
-    );
-  }
-
   activeProjects(Size s) {
     Map map = {
       "duration": "54",

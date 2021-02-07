@@ -33,18 +33,18 @@ class RegisterPage extends GetWidget<FirebaseController> {
           if (mailController.text.isEmail) {
             if (passController.text.length >= 7) {
               registerUser();
-              if (role == "Lunar") {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AraciBase()));
-              }
-              if (role == "Katılımcı") {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => KatilimciBase()));
-              }
-              if (role == "Gönüllü") {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => GonulluBase()));
-              }
+              // if (role == "Lunar") {
+              //   Navigator.push(context,
+              //       MaterialPageRoute(builder: (context) => AraciBase()));
+              // }
+              // if (role == "Katılımcı") {
+              //   Navigator.push(context,
+              //       MaterialPageRoute(builder: (context) => KatilimciBase()));
+              // }
+              // if (role == "Gönüllü") {
+              //   Navigator.push(context,
+              //       MaterialPageRoute(builder: (context) => GonulluBase()));
+              // }
             } else {
               Get.snackbar(
                   "Güçsüz Şifre ", "Lütfen en az 7 haneli bir şifre giriniz. ",

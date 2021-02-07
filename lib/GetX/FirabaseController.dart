@@ -21,7 +21,6 @@ class FirebaseController extends GetxController {
     update();
   }
 
-  SharedPreferences prefs;
   DocumentReference myUser;
   GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
   Rx<User> _firebaseUser = Rx<User>();
@@ -46,7 +45,6 @@ class FirebaseController extends GetxController {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
-        prefs.setString('uid', value.user.uid);
         FirebaseFirestore.instance
             .collection("kullaniciler")
             .doc(value.user.uid)
@@ -119,9 +117,7 @@ class FirebaseController extends GetxController {
             Get.offAll(GonulluBase());
           }
         });
-      }).whenComplete(() {
-        prefs.setString('uid', uid);
-      });
+      }).whenComplete(() {});
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         Get.snackbar("Kullanıcı bulunamadı",
