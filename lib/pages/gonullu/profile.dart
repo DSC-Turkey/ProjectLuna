@@ -1,8 +1,10 @@
 import 'package:Luna/GetX/FirabaseController.dart';
 import 'package:Luna/pages/gonullu/createProject.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:day_night_switch/day_night_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class GonulluProfil extends StatefulWidget {
   @override
@@ -12,8 +14,17 @@ class GonulluProfil extends StatefulWidget {
 class _GonulluProfil extends State<GonulluProfil> {
   final controller = Get.put(FirebaseController());
   bool toggleValue = true;
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    
     Size s = MediaQuery.of(context).size;
     return Scaffold(
       floatingActionButton: RaisedButton(

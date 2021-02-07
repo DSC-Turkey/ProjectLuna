@@ -6,10 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseController extends GetxController {
   FirebaseAuth _auth = FirebaseAuth.instance;
-
+  SharedPreferences prefs;
   GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
   Rx<User> _firebaseUser = Rx<User>();
 
@@ -30,6 +31,7 @@ class FirebaseController extends GetxController {
 
   void createUser(String firstname, String lastname, String email,
       String password, String role) async {
+    prefs = await SharedPreferences.getInstance();
     try {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
@@ -44,10 +46,12 @@ class FirebaseController extends GetxController {
           "email": email,
           "userRole": role,
         });
-      }).then((value) => Get.offAll(Base()));
+        prefs.setString("UserID", value.user.uid);
+      }).then((value) {
+        Get.offAll(Base());
+      });
 
       // reference.add(userdata).then((value) => Get.offAll(Base()));
-
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password' ||
           ' The given password is invalid.' == e.code) {

@@ -1,7 +1,9 @@
 import 'package:Luna/GetX/FirabaseController.dart';
 import 'package:Luna/pages/araci/createProject.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class KatilimciProfil extends StatefulWidget {
   @override
@@ -11,8 +13,26 @@ class KatilimciProfil extends StatefulWidget {
 class _KatilimciProfil extends State<KatilimciProfil> {
   final controller = Get.put(FirebaseController());
   bool toggleValue = true;
+  FirebaseFirestore firestore;
+  DocumentSnapshot documentSnapshot;
+  String id;
+  void getDatas() async {
+    // SharedPreferences.setMockInitialValues({});
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // id = prefs.getString("userID");
+    // documentSnapshot = await firestore.collection("kullaniciler").doc(id).get();
+    // print(documentSnapshot.data());
+  }
+  @override
+  void initState() {
+    getDatas();
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    print("a");
     Size s = MediaQuery.of(context).size;
     return Scaffold(
       floatingActionButton: RaisedButton(
@@ -76,15 +96,14 @@ class _KatilimciProfil extends State<KatilimciProfil> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
                 gradient: LinearGradient(
-                  begin: Alignment(-1.0, 0.0),
-                  end: Alignment(1.0, 0.0),
+                  begin: Alignment(1.0, 0.0),
+                  end: Alignment(-1.0, 0.0),
                   colors: [
-                    const Color(0xfffabd5e),
-                    const Color(0xfff7b053),
-                    const Color(0xfff49d42),
-                    const Color(0xfff3963d),
+                    const Color(0xff6088b0),
+                    const Color(0xff54789b),
+                    const Color(0xff405b75)
                   ],
-                  stops: [0.0, 0.232, 0.687, 1.0],
+                  stops: [0.0, 0.399, 1.0],
                 ),
               ),
               child: Column(
@@ -150,7 +169,7 @@ class _KatilimciProfil extends State<KatilimciProfil> {
           color: Color(0xFFF2F4F6),
           border: Border.all(
             width: 2,
-            color: Color(0xFFF49C42),
+            color:  Color(0xff54789b)
           ),
         ),
         child: Image.asset("assets/images/Rozet.png"),
@@ -167,7 +186,7 @@ class _KatilimciProfil extends State<KatilimciProfil> {
         width: s.height * 0.2,
         decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.all(color: Color(0xFFF49C42), width: 2),
+          border: Border.all(color: Color(0xff54789b), width: 2),
           shape: BoxShape.circle,
         ),
         child: Image.asset("assets/images/Sarışın Kadın.png"),
